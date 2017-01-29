@@ -1,0 +1,23 @@
+<ion-modal-view>
+    <div class="bar bar-header item-input-inset bar-calm">
+        <button class="button button-icon icon ion-ios-arrow-left" ng-click="closeModal()"></button>
+        Call {{ peer_id }}
+    </div>
+    
+    <ion-content class="padding has-header">
+        <div class="calling-container" ng-if="isCalling && !callIgnored && !callEnded && !callInProgress">
+            <p>Calling to <span class="balanced">{{ peer_id }}</span>...</p>
+            <button class="button button-assertive" ng-click="ignore()">Never mind</button>
+        </div>
+        
+        <div class="calling-container" ng-if="!isCalling && !callIgnored && !callInProgress && !callEnded">
+            <p><span class="balanced">{{ peer_id }}</span> is calling you</p>
+            <button class="button button-positive" ng-click="answer()">
+                Answer
+            </button>
+            <button class="button button-assertive" ng-click="ignore()">
+                Ignore
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>

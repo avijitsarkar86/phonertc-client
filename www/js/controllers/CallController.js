@@ -24,9 +24,52 @@
             $scope.call_modal = modal;
         });
         
-        function(isInitiatior, peer_id){
+        function call(isInitiatior, peer_id){
             
         }
+        
+        $scope.startCall = function(){            
+            $scope.isCalling = true;
+            $scope.callIgnored = false;
+            $scope.callEnded = false;
+            
+            SocketService.emit('sendMessage', {
+                'id' : id,
+                'peer_id' : $scope.peer_id,
+                'type' : 'call'
+            });
+            
+            $scope.call_modal.show();
+        }
+        
+        $scope.closeModal = function(){
+            $scope.call_modal.hide();
+        }
+        
+        $scope.ignore = function(){
+            $scope.call_modal.hide();
+        }
+        
+        function onMessageReceive(message){
+            console.log("onMessageReceive called: \n", message);
+            switch (message.type){
+                case 'call':
+                    $scope.isCalling = false;
+                    $scope.callEnded = false;
+                    $scope.callIgnored = false;
+                    $scope.callEnded = false;
+                    
+                    $scope.call_modal.show();
+                    $scope.peer_id = message.id;
+                    
+                    $scope.current_modal = 'call_modal';
+                    break;
+            }
+        }
+        
+        SocketService.on('messageReceived', onMessageReceive);
+        
+        
         
     }
 })();

@@ -1,7 +1,19 @@
 {
     "elements": {
-        "ion-header-bar": {},
-        "ion-content": {}
+        "ion-nav-view": {},
+        "ion-header-bar": {
+            "attributes": {
+                "class": {}
+            }
+        },
+        "ion-modal-view": {},
+        "ion-content": {
+            "attributes": {
+                "controller": {},
+                "class": {}
+            }
+        },
+        "ion-pane": {}
     },
     "attributes": {}
 }
